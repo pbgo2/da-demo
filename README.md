@@ -1,70 +1,97 @@
-# Getting Started with Create React App
+# AI/ML Predictor in Your Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
+The AI/ML predictor is a small neural network implemented with **TensorFlow.js** to estimate a student's likelihood of passing a course based on their grades and progress. It’s designed to be simple, fast, and easy to run entirely in the browser.
 
-## Available Scripts
+## How It Works
+1. **Input Data**: Each student has two main features:
+   - `grade` – the numeric score in the course.
+   - `progress` – the completion percentage of the course.
 
-In the project directory, you can run:
+2. **Model Architecture**:
+   - Input layer: 2 neurons (grade, progress)
+   - Hidden layers: 
+     - First: 8 neurons, ReLU activation  
+     - Second: 4 neurons, ReLU activation
+   - Output layer: 1 neuron, Sigmoid activation (probability of passing)
 
-### `npm start`
+            ```
+                score = grade * 0.7 + progress * 0.3
+                label = score >= 50 ? 1 : 0
+            ```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+3. **Training**:
+   - Uses **synthetic data** generated in-memory.
+   - Labels are calculated with a simple weighted rule: `score = 0.7*grade + 0.3*progress`.
+   - Trains for 20 epochs using the **Adam optimizer** and **binary crossentropy** loss.
 
-### `npm test`
+4. **Prediction**:
+   - Takes a student's grade and progress.
+   - Produces a probability (0–1) of passing.
+   - Frontend visualizes results as a pie chart (`Pass` vs `Fail`).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+            '''
+                    const { predict } = require('./predictor');
+                    const probability = await predict(grade, progress);
+                    res.json({ probability });
+        '''
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Key Concepts
+- **Neural Networks**: Models patterns in data through layers of interconnected nodes (neurons).  
+- **ReLU Activation**: Allows the network to learn non-linear relationships.  
+- **Sigmoid Activation**: Converts outputs to probabilities.  
+- **In-Memory Training**: Enables quick testing without saving/loading models.  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+# AI/ML Predictor Workflow
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Student Data
+┌─────────────┐
+│ grade │
+│ progress │
+└─────┬───────┘
+│
+▼
+┌───────────┐
+│ Input │
+│ Layer (2) │
+└─────┬─────┘
+│
+▼
+┌───────────┐
+│ Hidden │
+│ Layer 1 │
+│ (8 neurons│
+│ ReLU) │
+└─────┬─────┘
+│
+▼
+┌───────────┐
+│ Hidden │
+│ Layer 2 │
+│ (4 neurons│
+│ ReLU) │
+└─────┬─────┘
+│
+▼
+┌───────────┐
+│ Output │
+│ Layer (1) │
+│ Sigmoid │
+└─────┬─────┘
+│
+▼
+┌───────────┐
+│ Probability│
+│ of Passing │
+└─────┬─────┘
+│
+▼
+┌─────────────┐
+│ Frontend │
+│ Pie Chart │
+│ Pass / Fail │
+└─────────────┘
