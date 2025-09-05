@@ -1,4 +1,4 @@
-# AI/ML Predictor in Your Project
+# AI/ML Predictor
 
 ## Overview
 The AI/ML predictor is a small neural network implemented with **TensorFlow.js** to estimate a student's likelihood of passing a course based on their grades and progress. It’s designed to be simple, fast, and easy to run entirely in the browser.
