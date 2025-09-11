@@ -1,5 +1,5 @@
 import { connectDB } from './_db';
-import Student from '../models/Student';
+import Student from './models/Student';
 
 export default async function handler(req, res) {
   await connectDB();
