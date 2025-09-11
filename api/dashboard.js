@@ -1,7 +1,7 @@
 import { connectDB } from './_db';
-import Student from '../models/Student';
-import Course from '../models/Course';
-import Enrollment from '../models/Enrollment';
+import Student from './models/Student';
+import Course from './models/Course';
+import Enrollment from './models/Enrollment';
 
 export default async function handler(req, res) {
   await connectDB();
