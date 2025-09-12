@@ -154,7 +154,7 @@ async function predict(grade, progress) {
 }
 
 
-export default handler = async (req, res) => {
+export default async function handler(req, res) => {
   const { grade, progress } = req.body;
   if (grade == null || progress == null) {
     return res.status(400).json({ error: 'Missing grade or progress' });
