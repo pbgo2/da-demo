@@ -104,7 +104,8 @@
 // module.exports = { initModel, predict };
 
 // backend/predictor.js
-const tf = require('@tensorflow/tfjs');
+// const tf = require('@tensorflow/tfjs');
+import * as tf from '@tensorflow/tfjs-node';
 
 let model;
 
