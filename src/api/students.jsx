@@ -7,7 +7,7 @@
 
 // students.js
 export async function getStudents() {
-  const res = await fetch("/api/students");
+  const res = await fetch("/api/student");
   if (!res.ok) throw new Error("Failed to fetch students");
   return res.json();
 }
