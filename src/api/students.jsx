@@ -13,7 +13,7 @@ export async function getStudents() {
 }
 
 async function createStudent(studentData) {
-  const res = await fetch("/api/students", {
+  const res = await fetch("/api/student", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(studentData),
