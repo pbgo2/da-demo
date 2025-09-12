@@ -28,6 +28,7 @@ function Predictor() {
   const handlePredict = async () => {
     if (!grades || !progress) return;
     const data = await predictPerformance(grades, progress);
+    console.log(data)
     setChartData(data);
   };
 
