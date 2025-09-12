@@ -9,7 +9,7 @@ export const predictPerformance = async (grades, progress) => {
     return Number(acc)+Number(val)},0) / progress.split(",").length;
   console.log("Average Progress Value:", progressVal);
 
-  const res = await fetch("/api/predict", {
+  const res = await fetch("/api/predictor", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ grade: gradeVal, progress: progressVal }),
