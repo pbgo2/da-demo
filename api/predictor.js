@@ -56,7 +56,7 @@ const tf = require('@tensorflow/tfjs');
 
 let model;
 
-async function initModel() {
+export async function initModel() {
   if (model) return model;
 
   console.log("⚡ Initializing in-memory ML model...");
