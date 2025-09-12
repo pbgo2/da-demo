@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+import {Student} from "./Student"
+import {Course} from "./Course"
 
 const enrollmentSchema = new mongoose.Schema({
   studentId: { type: mongoose.Schema.Types.ObjectId, ref: 'Student' },
